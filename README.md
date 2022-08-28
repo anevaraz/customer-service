@@ -14,7 +14,7 @@ Customer service project, testable and high performance Node.js API.
 
 ## Installation for local development
 ```bash
-$ cp example.env .env
+$ cp .env.example .env
 $ yarn
 ```
 ### Running the app
@@ -31,7 +31,6 @@ $ yarn start:prod
 ```
 
 ## Endpoints
-* REST: 
 
 - POST /v1/customer
 - GET /v1/customer
@@ -44,6 +43,6 @@ $ yarn start:prod
 
 ```bash
 # unit tests
-$ npm run test
+$ yarn test
 
 ``` 
