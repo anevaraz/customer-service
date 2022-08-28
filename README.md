@@ -32,11 +32,12 @@ $ yarn start:prod
 
 ## Endpoints
 * REST: 
-  /v1/customer, POST
-  /v1/customer, GET
-  /v1/customer/:id, GET
-  /v1/customer/:id, PATCH
-  /v1/customer/:id, DELETE
+
+- /v1/customer, POST;
+- /v1/customer, GET;
+- /v1/customer/:id, GET;
+- /v1/customer/:id, PATCH;
+- /v1/customer/:id, DELETE;
 
 
 ## Test
