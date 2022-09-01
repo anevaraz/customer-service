@@ -17,7 +17,6 @@ import { UserStatusEnum } from './enum/user-status.enum';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('v1/user')
-@UseGuards(AuthGuard('jwt'))
 export class UserController {
   constructor(private readonly usersService: UserService) {}
 
@@ -26,11 +25,13 @@ export class UserController {
     return this.usersService.create(createUserDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   findAllByStatus(@Query('status') status: number) {
     return this.usersService.findAllByStatus(status);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   findOneOrFail(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.usersService.findOneByOrFail({
@@ -39,6 +40,7 @@ export class UserController {
     });
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
   update(
     @Param('id', new ParseUUIDPipe()) id: string,
@@ -47,6 +49,7 @@ export class UserController {
     return this.usersService.update(id, updateUserDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   deactivate(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.usersService.deactivate(id);
