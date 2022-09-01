@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { CustomerModule } from './modules/customer/customer.module';
+import { UserModule } from './app/users/users.module';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import { CustomerModule } from './modules/customer/customer.module';
       logging: process.env.NODE_ENV === 'development' ? true : false,
       entities: [`${__dirname}/**/*.entity{.js,.ts}`],
     } as TypeOrmModuleOptions),
-    CustomerModule,
+    UserModule,
   ],
   controllers: [],
   providers: [],

@@ -5,10 +5,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { CustomerStatusEnum } from '../enum/customer-status.enum';
+import { UserStatusEnum } from '../enum/user-status.enum';
 
-@Entity({ name: 'customer' })
-export class CustomerEntity {
+@Entity({ name: 'users' })
+export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -36,7 +36,7 @@ export class CustomerEntity {
   @Column({ name: 'phone_number', length: 11, nullable: true })
   phoneNumber: string;
 
-  @Column({ width: 1, default: CustomerStatusEnum.ACTIVE })
+  @Column({ width: 1, default: UserStatusEnum.ACTIVE })
   status: number;
 
   @CreateDateColumn({ name: 'created_at' })

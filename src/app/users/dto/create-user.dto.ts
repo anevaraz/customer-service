@@ -8,13 +8,13 @@ import {
   Length,
   Matches,
 } from 'class-validator';
-import { CustomerGenderEnum } from '../enum/customer-gender.enum';
-import { CustomerTypeEnum } from '../enum/customer-type.enum';
-import { CustomerValidationRegex } from '../regex/customer-validation.regex';
+import { UserGenderEnum } from '../enum/user-gender.enum';
+import { UserTypeEnum } from '../enum/user-type.enum';
+import { UserValidationRegex } from '../regex/user-validation.regex';
 
-export class CreateCustomerDto {
+export class CreateUserDto {
   @IsNotEmpty()
-  @IsEnum([CustomerTypeEnum.PERSON, CustomerTypeEnum.COMPANY])
+  @IsEnum([UserTypeEnum.PERSON, UserTypeEnum.COMPANY])
   type: string;
 
   @IsNotEmpty()
@@ -36,11 +36,11 @@ export class CreateCustomerDto {
   lastName: string;
 
   @IsOptional()
-  @Matches(new RegExp(CustomerValidationRegex.DATE_OF_BIRTH))
+  @Matches(new RegExp(UserValidationRegex.DATE_OF_BIRTH))
   dateOfBirth?: string;
 
   @IsOptional()
-  @IsEnum([CustomerGenderEnum.FEMALE, CustomerGenderEnum.MALE])
+  @IsEnum([UserGenderEnum.FEMALE, UserGenderEnum.MALE])
   gender?: string;
 
   @IsOptional()

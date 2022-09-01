@@ -32,11 +32,11 @@ $ yarn start:prod
 
 ## Endpoints
 
-- POST /v1/customer
-- GET /v1/customer
-- GET /v1/customer/:id
-- PATCH /v1/customer/:id
-- DELETE /v1/customer/:id
+- POST /v1/user
+- GET /v1/user
+- GET /v1/user/:id
+- PATCH /v1/user/:id
+- DELETE /v1/user/:id
 
 
 ## Test
