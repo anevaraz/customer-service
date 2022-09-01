@@ -41,6 +41,7 @@ describe('UserService', () => {
         type: 'any-type',
         documentNumber: 'any-document',
         email: 'any@email.com',
+        password: 'any_password',
         firstName: 'any-first-name',
         lastName: 'any-last-name',
       };
