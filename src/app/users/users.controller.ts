@@ -8,13 +8,16 @@ import {
   Delete,
   Query,
   ParseUUIDPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserStatusEnum } from './enum/user-status.enum';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('v1/user')
+@UseGuards(AuthGuard('jwt'))
 export class UserController {
   constructor(private readonly usersService: UserService) {}
 
