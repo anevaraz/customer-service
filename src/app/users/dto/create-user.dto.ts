@@ -8,9 +8,9 @@ import {
   Length,
   Matches,
 } from 'class-validator';
+import { RegexHelper } from '../../../helpers/regex.helper';
 import { UserGenderEnum } from '../enum/user-gender.enum';
 import { UserTypeEnum } from '../enum/user-type.enum';
-import { UserValidationRegex } from '../regex/user-validation.regex';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -36,7 +36,7 @@ export class CreateUserDto {
   lastName: string;
 
   @IsOptional()
-  @Matches(new RegExp(UserValidationRegex.DATE_OF_BIRTH))
+  @Matches(new RegExp(RegexHelper.DATE_OF_BIRTH))
   dateOfBirth?: string;
 
   @IsOptional()
