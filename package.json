@@ -29,7 +29,8 @@
   },
   "lint-staged": {
     "**/*.ts": [
-      "eslint --fix"
+      "yarn eslint --fix",
+      "yarn format"
     ]
   },
   "dependencies": {
@@ -44,7 +45,6 @@
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
-    "husky": "^8.0.1",
     "mysql": "^2.18.1",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.0",
@@ -71,7 +71,9 @@
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^8.0.1",
     "jest": "28.1.2",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.3.2",
     "source-map-support": "^0.5.20",
     "supertest": "^6.1.3",
