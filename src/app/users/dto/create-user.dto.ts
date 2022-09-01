@@ -8,6 +8,7 @@ import {
   Length,
   Matches,
 } from 'class-validator';
+import { MessagesHelper } from '../../../helpers/messages.helper';
 import { RegexHelper } from '../../../helpers/regex.helper';
 import { UserGenderEnum } from '../enum/user-gender.enum';
 import { UserTypeEnum } from '../enum/user-type.enum';
@@ -26,6 +27,12 @@ export class CreateUserDto {
   @IsEmail()
   @Length(6, 100)
   email: string;
+
+  @IsNotEmpty()
+  @Matches(new RegExp(RegexHelper.PASSWORD), {
+    message: MessagesHelper.PASSWORD_VALID,
+  })
+  password: string;
 
   @IsNotEmpty()
   @Length(3, 20)
