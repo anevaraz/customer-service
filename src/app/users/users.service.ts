@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { FindOptionsWhere, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { DeactivateUserDto } from './dto/deactivate-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -25,24 +25,22 @@ export class UserService {
     });
   }
 
-  async findOneOrFail(id: string) {
+  async findOneByOrFail(where: FindOptionsWhere<UserEntity>) {
     try {
-      return await this.usersRepository.findOneOrFail({
-        where: { id, status: UserStatusEnum.ACTIVE },
-      });
+      return await this.usersRepository.findOneByOrFail(where);
     } catch (e) {
       throw new NotFoundException(e.message);
     }
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
-    const user: UserEntity = await this.findOneOrFail(id);
+    const user: UserEntity = await this.findOneByOrFail({ id });
     this.usersRepository.merge(user, updateUserDto);
     return await this.usersRepository.save(user);
   }
 
   async deactivate(id: string) {
-    const user: UserEntity = await this.findOneOrFail(id);
+    const user: UserEntity = await this.findOneByOrFail({ id });
     const deactivate: DeactivateUserDto = {
       status: UserStatusEnum.DEACTIVE,
     };

@@ -12,6 +12,7 @@ import {
 import { UserService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserStatusEnum } from './enum/user-status.enum';
 
 @Controller('v1/user')
 export class UserController {
@@ -29,7 +30,10 @@ export class UserController {
 
   @Get(':id')
   findOneOrFail(@Param('id', new ParseUUIDPipe()) id: string) {
-    return this.usersService.findOneOrFail(id);
+    return this.usersService.findOneByOrFail({
+      id,
+      status: UserStatusEnum.ACTIVE,
+    });
   }
 
   @Patch(':id')
