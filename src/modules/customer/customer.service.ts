@@ -16,8 +16,7 @@ export class CustomerService {
 
   async create(createCustomerDto: CreateCustomerDto) {
     const customer = this.customerRepository.create(createCustomerDto);
-    await this.customerRepository.save(customer);
-    return;
+    return await this.customerRepository.save(customer);
   }
 
   async findAllByStatus(status: number) {

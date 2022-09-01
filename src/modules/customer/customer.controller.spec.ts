@@ -39,7 +39,6 @@ describe('CustomerController', () => {
         email: 'any@email.com',
         firstName: 'any-first-name',
         lastName: 'any-last-name',
-        fullName: 'any-full-name',
       };
       const customerEntityMock = { ...body } as CustomerEntity;
       jest
