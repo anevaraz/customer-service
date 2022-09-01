@@ -1,10 +1,12 @@
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { hashSync } from 'bcrypt';
 import { UserStatusEnum } from '../enum/user-status.enum';
 
 @Entity({ name: 'users' })
@@ -20,6 +22,9 @@ export class UserEntity {
 
   @Column({ length: 100, nullable: false })
   email: string;
+
+  @Column({ length: 100, nullable: false })
+  password: string;
 
   @Column({ name: 'first_name', length: 20, nullable: false })
   firstName: string;
@@ -44,4 +49,9 @@ export class UserEntity {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updateAt: string;
+
+  @BeforeInsert()
+  hashPassword() {
+    this.password = hashSync(this.password, 8);
+  }
 }
