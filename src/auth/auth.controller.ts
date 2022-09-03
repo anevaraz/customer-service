@@ -10,8 +10,8 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
   @UseGuards(AuthGuard('local'))
   @Post('login')
-  @ApiOperation({ summary: 'users login to generate access token' })
-  @ApiResponse({ status: 201, description: 'access token generated' })
+  @ApiOperation({ summary: 'users login to generate token' })
+  @ApiResponse({ status: 201, description: 'token generated' })
   @ApiResponse({ status: 401, type: UnauthorizedUserSwagger })
   async login(@Req() req: any) {
     return await this.authService.login(req.user);
