@@ -12,6 +12,7 @@ Customer service project, testable and high performance Node.js API.
 - Husky Git hooks that automatically runs [Jest](https://jestjs.io/) before all pushs;
 - `ConfigService`: easily manage environment variables;
 - `ValidationPipe`: evaluate input data and if valid, simply pass it through unchanged; otherwise, throw an exception when the data is incorrect;
+- `Swagger`: The [OpenAPI](https://swagger.io/specification/) specification is a language-agnostic definition format used to describe RESTful APIs. Nest provides a dedicated module which allows generating such a specification by leveraging decorators;
 
 
 ## Installation for local development
@@ -32,13 +33,21 @@ $ yarn start:dev
 $ yarn start:prod
 ```
 
+## Docs
+
+Reference documentation to assist developers in integrating and consuming customer service.
+available in the `/docs` path
+
 ## Endpoints
 
+- GET /alive
+- GET /docs
 - POST /v1/user
 - GET /v1/user
 - GET /v1/user/:id
 - PATCH /v1/user/:id
 - DELETE /v1/user/:id
+- POST v1/auth/login
 
 
 ## Test
