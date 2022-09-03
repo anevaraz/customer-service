@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { FindOptionsWhere, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { DeactivateUserDto } from './dto/deactivate-user.dto';
+import { QueryUserDto } from './dto/query-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/users.entity';
 import { UserStatusEnum } from './enum/user-status.enum';
@@ -19,9 +20,9 @@ export class UserService {
     return await this.usersRepository.save(user);
   }
 
-  async findAllByStatus(status: number) {
+  async findAllByStatus(query: QueryUserDto) {
     return await this.usersRepository.find({
-      where: { status: status | UserStatusEnum.DEACTIVE },
+      where: { status: query.status | UserStatusEnum.DEACTIVE },
     });
   }
 

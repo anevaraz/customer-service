@@ -15,6 +15,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserStatusEnum } from './enum/user-status.enum';
 import { AuthGuard } from '@nestjs/passport';
+import { QueryUserDto } from './dto/query-user.dto';
 
 @Controller('v1/user')
 export class UserController {
@@ -27,8 +28,8 @@ export class UserController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get()
-  findAllByStatus(@Query('status') status: number) {
-    return this.usersService.findAllByStatus(status);
+  findAllByStatus(@Query() query: QueryUserDto) {
+    return this.usersService.findAllByStatus(query);
   }
 
   @UseGuards(AuthGuard('jwt'))
