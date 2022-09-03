@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { MessagesHelper } from '../../helpers/messages.helper';
 import { FindOptionsWhere, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { DeactivateUserDto } from './dto/deactivate-user.dto';
@@ -17,12 +18,13 @@ export class UserService {
 
   async create(createUserDto: CreateUserDto) {
     const user = this.usersRepository.create(createUserDto);
-    return await this.usersRepository.save(user);
+    await this.usersRepository.save(user);
+    return;
   }
 
   async findAllByStatus(query: QueryUserDto) {
     return await this.usersRepository.find({
-      where: { status: query.status | UserStatusEnum.DEACTIVE },
+      where: { status: Number(query) | UserStatusEnum.DEACTIVE },
     });
   }
 
@@ -30,7 +32,7 @@ export class UserService {
     try {
       return await this.usersRepository.findOneByOrFail(where);
     } catch (e) {
-      throw new NotFoundException(e.message);
+      throw new NotFoundException(MessagesHelper.NOT_FOUND);
     }
   }
 
@@ -46,6 +48,7 @@ export class UserService {
       status: UserStatusEnum.DEACTIVE,
     };
     this.usersRepository.merge(user, deactivate);
-    return await this.usersRepository.save(user);
+    await this.usersRepository.save(user);
+    return;
   }
 }
