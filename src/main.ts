@@ -12,6 +12,10 @@ async function bootstrap() {
       'reference documentation to assist developers in integrating and consuming customer service',
     )
     .setVersion('1.0')
+    .addBearerAuth(
+      { type: 'http', scheme: 'bearer', bearerFormat: 'JWT', in: 'header' },
+      'jwt',
+    )
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);

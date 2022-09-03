@@ -15,7 +15,12 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserStatusEnum } from './enum/user-status.enum';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { QueryUserDto } from './dto/query-user.dto';
 import { ResponseUserSwagger } from './swagger/response.user.swagger';
 import { ValidationUserSwagger } from './swagger/validation.user.swagger';
@@ -38,6 +43,7 @@ export class UserController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get()
+  @ApiBearerAuth('jwt')
   @ApiOperation({ summary: 'find all users by status (default `active`)' })
   @ApiResponse({ status: 200, type: ResponseUserSwagger, isArray: true })
   @ApiResponse({ status: 401, type: UnauthorizedUserSwagger })
@@ -47,6 +53,7 @@ export class UserController {
 
   @UseGuards(AuthGuard('jwt'))
   @Get(':id')
+  @ApiBearerAuth('jwt')
   @ApiOperation({ summary: 'find user by UUID' })
   @ApiResponse({ status: 200, type: ResponseUserSwagger })
   @ApiResponse({ status: 401, type: UnauthorizedUserSwagger })
@@ -60,6 +67,7 @@ export class UserController {
 
   @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
+  @ApiBearerAuth('jwt')
   @ApiOperation({ summary: 'update user info by UUID' })
   @ApiResponse({ status: 200, type: ResponseUserSwagger })
   @ApiResponse({ status: 401, type: UnauthorizedUserSwagger })
@@ -73,6 +81,7 @@ export class UserController {
 
   @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
+  @ApiBearerAuth('jwt')
   @ApiOperation({ summary: 'deactivate user account by UUID' })
   @ApiResponse({ status: 200, description: 'deactivated user account' })
   @ApiResponse({ status: 401, type: UnauthorizedUserSwagger })
