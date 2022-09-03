@@ -74,7 +74,7 @@ export class UserController {
   @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @ApiOperation({ summary: 'deactivate user account by UUID' })
-  @ApiResponse({ status: 200, description: 'no return value' })
+  @ApiResponse({ status: 200, description: 'deactivated user account' })
   @ApiResponse({ status: 401, type: UnauthorizedUserSwagger })
   @ApiResponse({ status: 404, type: NotFoundUserSwagger })
   deactivate(@Param('id', new ParseUUIDPipe()) id: string) {
