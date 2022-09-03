@@ -24,7 +24,7 @@ import {
 import { QueryUserDto } from './dto/query-user.dto';
 import { ResponseUserSwagger } from './swagger/response.user.swagger';
 import { ValidationUserSwagger } from './swagger/validation.user.swagger';
-import { UnauthorizedUserSwagger } from './swagger/unauthorized.user.swagger';
+import { UnauthorizedUserSwagger } from '../../auth/swagger/unauthorized.auth.swagger';
 import { NotFoundUserSwagger } from './swagger/not-found.user.swagger';
 
 @Controller('v1/user')
