@@ -23,7 +23,7 @@ import {
 } from '@nestjs/swagger';
 import { QueryUserDto } from './dto/query-user.dto';
 import { ResponseUserSwagger } from '../../helpers/swagger/response.user.swagger';
-import { BadRequestSwagger } from '../../helpers/swagger/bad_request.swagger';
+import { BadRequestSwagger } from '../../helpers/swagger/bad-request.swagger';
 import { UnauthorizedSwagger } from '../../helpers/swagger/unauthorized.swagger';
 import { NotFoundSwagger } from '../../helpers/swagger/not-found.swagger';
 
