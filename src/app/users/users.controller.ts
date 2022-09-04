@@ -22,10 +22,10 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { QueryUserDto } from './dto/query-user.dto';
-import { ResponseUserSwagger } from './swagger/response.user.swagger';
-import { ValidationUserSwagger } from './swagger/validation.user.swagger';
-import { UnauthorizedUserSwagger } from '../../auth/swagger/unauthorized.auth.swagger';
-import { NotFoundUserSwagger } from './swagger/not-found.user.swagger';
+import { ResponseUserSwagger } from '../../helpers/swagger/response.user.swagger';
+import { BadRequestSwagger } from '../../helpers/swagger/bad_request.swagger';
+import { UnauthorizedSwagger } from '../../helpers/swagger/unauthorized.swagger';
+import { NotFoundSwagger } from '../../helpers/swagger/not-found.swagger';
 
 @Controller('v1/user')
 @ApiTags('Users')
@@ -35,8 +35,8 @@ export class UserController {
   @Post()
   @ApiOperation({ summary: 'create a new user' })
   @ApiResponse({ status: 201, type: ResponseUserSwagger })
-  @ApiResponse({ status: 400, type: ValidationUserSwagger })
-  @ApiResponse({ status: 401, type: UnauthorizedUserSwagger })
+  @ApiResponse({ status: 400, type: BadRequestSwagger })
+  @ApiResponse({ status: 401, type: UnauthorizedSwagger })
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
@@ -46,7 +46,7 @@ export class UserController {
   @ApiBearerAuth('jwt')
   @ApiOperation({ summary: 'find all users by status (default `active`)' })
   @ApiResponse({ status: 200, type: ResponseUserSwagger, isArray: true })
-  @ApiResponse({ status: 401, type: UnauthorizedUserSwagger })
+  @ApiResponse({ status: 401, type: UnauthorizedSwagger })
   findAllByStatus(@Query('status') query: QueryUserDto) {
     return this.usersService.findAllByStatus(query);
   }
@@ -56,8 +56,8 @@ export class UserController {
   @ApiBearerAuth('jwt')
   @ApiOperation({ summary: 'find user by UUID' })
   @ApiResponse({ status: 200, type: ResponseUserSwagger })
-  @ApiResponse({ status: 401, type: UnauthorizedUserSwagger })
-  @ApiResponse({ status: 404, type: NotFoundUserSwagger })
+  @ApiResponse({ status: 401, type: UnauthorizedSwagger })
+  @ApiResponse({ status: 404, type: NotFoundSwagger })
   findOneOrFail(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.usersService.findOneByOrFail({
       id,
@@ -70,8 +70,8 @@ export class UserController {
   @ApiBearerAuth('jwt')
   @ApiOperation({ summary: 'update user info by UUID' })
   @ApiResponse({ status: 200, type: ResponseUserSwagger })
-  @ApiResponse({ status: 401, type: UnauthorizedUserSwagger })
-  @ApiResponse({ status: 404, type: NotFoundUserSwagger })
+  @ApiResponse({ status: 401, type: UnauthorizedSwagger })
+  @ApiResponse({ status: 404, type: NotFoundSwagger })
   update(
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() updateUserDto: UpdateUserDto,
@@ -84,8 +84,8 @@ export class UserController {
   @ApiBearerAuth('jwt')
   @ApiOperation({ summary: 'deactivate user account by UUID' })
   @ApiResponse({ status: 200, description: 'deactivated user account' })
-  @ApiResponse({ status: 401, type: UnauthorizedUserSwagger })
-  @ApiResponse({ status: 404, type: NotFoundUserSwagger })
+  @ApiResponse({ status: 401, type: UnauthorizedSwagger })
+  @ApiResponse({ status: 404, type: NotFoundSwagger })
   deactivate(@Param('id', new ParseUUIDPipe()) id: string) {
     this.usersService.deactivate(id);
     return;

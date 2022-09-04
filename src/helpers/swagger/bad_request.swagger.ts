@@ -1,11 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class NotFoundUserSwagger {
+export class BadRequestSwagger {
   @ApiProperty()
   statusCode: number;
 
   @ApiProperty()
-  message: string;
+  message: string[];
 
   @ApiProperty()
   error: string;

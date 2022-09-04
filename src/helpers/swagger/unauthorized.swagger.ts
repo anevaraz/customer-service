@@ -1,12 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class ValidationUserSwagger {
+export class UnauthorizedSwagger {
   @ApiProperty()
   statusCode: number;
 
   @ApiProperty()
-  message: string[];
-
-  @ApiProperty()
-  error: string;
+  message: string;
 }
