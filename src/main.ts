@@ -12,6 +12,7 @@ async function bootstrap() {
       'reference documentation to assist developers in integrating and consuming customer service',
     )
     .setVersion('1.0')
+    .addApiKey({ type: 'apiKey', in: 'header' }, 'apiKey')
     .addBearerAuth(
       { type: 'http', scheme: 'bearer', bearerFormat: 'JWT', in: 'header' },
       'jwt',

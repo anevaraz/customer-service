@@ -19,6 +19,7 @@ import {
   ApiBearerAuth,
   ApiOperation,
   ApiResponse,
+  ApiSecurity,
   ApiTags,
 } from '@nestjs/swagger';
 import { QueryUserDto } from './dto/query-user.dto';
@@ -29,6 +30,7 @@ import { NotFoundSwagger } from '../../helpers/swagger/not-found.swagger';
 
 @Controller('v1/user')
 @ApiTags('Users')
+@ApiSecurity('apiKey')
 export class UserController {
   constructor(private readonly usersService: UserService) {}
 

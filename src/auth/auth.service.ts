@@ -33,4 +33,8 @@ export class AuthService {
 
     return user;
   }
+
+  validateApiKey(key: string) {
+    return process.env.API_KEY === key;
+  }
 }
