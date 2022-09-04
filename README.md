@@ -31,6 +31,12 @@ $ yarn start:dev
 
 # local production mode
 $ yarn start:prod
+
+# running db service on the background
+$ docker-compose up -d
+
+# stopping the running containers
+$ docker-compose down
 ```
 
 ## Docs
