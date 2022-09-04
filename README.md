@@ -44,7 +44,7 @@ $ yarn start:dev
 $ yarn start:prod
 ```
 
-# Docs
+## Docs
 
 Reference documentation to assist developers in integrating and consuming customer service.
 available in the `/docs` path
@@ -58,13 +58,13 @@ available in the `/docs` path
 
 ### Security routes
 
-### apiKey (application token)
+#### apiKey (application token)
 
 - POST v1/auth/login
 - POST /v1/user
 - GET /v1/user
 
-### apiKey (application token) and JWT token (user)
+#### apiKey (application token) and JWT token (user)
 
 - GET /v1/user/:id
 - PATCH /v1/user/:id
