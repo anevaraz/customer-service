@@ -23,7 +23,7 @@ export class UserService {
 
   async findAllByStatus(query: QueryUserDto) {
     return await this.usersRepository.find({
-      where: { status: Number(query) | UserStatusEnum.DEACTIVE },
+      where: { status: Number(query) | UserStatusEnum.ACTIVE },
     });
   }
 
