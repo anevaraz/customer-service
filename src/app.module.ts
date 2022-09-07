@@ -31,7 +31,7 @@ import { JwtService } from '@nestjs/jwt';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes('/v1/user');
+    consumer.apply(AuthMiddleware).forRoutes('/v1');
     consumer.apply(JwtUserMiddleware).forRoutes('/v1/user/:id');
   }
 }
