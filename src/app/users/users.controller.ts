@@ -27,6 +27,7 @@ import { ResponseUserSwagger } from '../../helpers/swagger/response.user.swagger
 import { BadRequestSwagger } from '../../helpers/swagger/bad-request.swagger';
 import { UnauthorizedSwagger } from '../../helpers/swagger/unauthorized.swagger';
 import { NotFoundSwagger } from '../../helpers/swagger/not-found.swagger';
+import { ForbiddenUserSwagger } from '../../helpers/swagger/forbidden.user.swagger';
 
 @Controller('v1/user')
 @ApiTags('Users')
@@ -59,6 +60,7 @@ export class UserController {
   @ApiOperation({ summary: 'find user by UUID' })
   @ApiResponse({ status: 200, type: ResponseUserSwagger })
   @ApiResponse({ status: 401, type: UnauthorizedSwagger })
+  @ApiResponse({ status: 403, type: ForbiddenUserSwagger })
   @ApiResponse({ status: 404, type: NotFoundSwagger })
   findOneOrFail(@Param('id', new ParseUUIDPipe()) id: string) {
     return this.usersService.findOneByOrFail({
@@ -73,6 +75,7 @@ export class UserController {
   @ApiOperation({ summary: 'update user info by UUID' })
   @ApiResponse({ status: 200, type: ResponseUserSwagger })
   @ApiResponse({ status: 401, type: UnauthorizedSwagger })
+  @ApiResponse({ status: 403, type: ForbiddenUserSwagger })
   @ApiResponse({ status: 404, type: NotFoundSwagger })
   update(
     @Param('id', new ParseUUIDPipe()) id: string,
@@ -87,6 +90,7 @@ export class UserController {
   @ApiOperation({ summary: 'deactivate user account by UUID' })
   @ApiResponse({ status: 200, description: 'deactivated user account' })
   @ApiResponse({ status: 401, type: UnauthorizedSwagger })
+  @ApiResponse({ status: 403, type: ForbiddenUserSwagger })
   @ApiResponse({ status: 404, type: NotFoundSwagger })
   deactivate(@Param('id', new ParseUUIDPipe()) id: string) {
     this.usersService.deactivate(id);
