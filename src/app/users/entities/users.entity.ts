@@ -3,11 +3,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { hashSync } from 'bcrypt';
 import { UserStatusEnum } from '../enum/user-status.enum';
+import { AddressEntity } from '../../../app/address/entities/address.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -49,6 +51,9 @@ export class UserEntity {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updateAt: string;
+
+  @OneToMany(() => AddressEntity, (address) => address.user)
+  addresses: AddressEntity[];
 
   @BeforeInsert()
   hashPassword() {
