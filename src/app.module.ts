@@ -8,6 +8,7 @@ import { AppController } from './app.controller';
 import { AuthMiddleware } from './middleware/auth.middleware';
 import { JwtUserMiddleware } from './middleware/jwt-user.middleware';
 import { JwtService } from '@nestjs/jwt';
+import { AddressModule } from './app/address/address.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { JwtService } from '@nestjs/jwt';
     } as TypeOrmModuleOptions),
     UserModule,
     AuthModule,
+    AddressModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtService],
