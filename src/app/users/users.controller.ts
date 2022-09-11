@@ -28,6 +28,7 @@ import { BadRequestSwagger } from '../../helpers/swagger/bad-request.swagger';
 import { UnauthorizedSwagger } from '../../helpers/swagger/unauthorized.swagger';
 import { NotFoundSwagger } from '../../helpers/swagger/not-found.swagger';
 import { ForbiddenUserSwagger } from '../../helpers/swagger/forbidden.user.swagger';
+import { UserEntity } from './entities/users.entity';
 
 @Controller('v1/user')
 @ApiTags('Users')
@@ -40,17 +41,16 @@ export class UserController {
   @ApiResponse({ status: 201, type: ResponseUserSwagger })
   @ApiResponse({ status: 400, type: BadRequestSwagger })
   @ApiResponse({ status: 401, type: UnauthorizedSwagger })
-  create(@Body() createUserDto: CreateUserDto) {
+  create(@Body() createUserDto: CreateUserDto): Promise<UserEntity> {
     return this.usersService.create(createUserDto);
   }
 
-  @UseGuards(AuthGuard('jwt'))
   @Get()
   @ApiBearerAuth('jwt')
   @ApiOperation({ summary: 'find all users by status (default `active`)' })
   @ApiResponse({ status: 200, type: ResponseUserSwagger, isArray: true })
   @ApiResponse({ status: 401, type: UnauthorizedSwagger })
-  findAllByStatus(@Query('status') query: QueryUserDto) {
+  findAllByStatus(@Query('status') query: QueryUserDto): Promise<UserEntity[]> {
     return this.usersService.findAllByStatus(query);
   }
 
@@ -62,7 +62,9 @@ export class UserController {
   @ApiResponse({ status: 401, type: UnauthorizedSwagger })
   @ApiResponse({ status: 403, type: ForbiddenUserSwagger })
   @ApiResponse({ status: 404, type: NotFoundSwagger })
-  findOneOrFail(@Param('id', new ParseUUIDPipe()) id: string) {
+  findOneOrFail(
+    @Param('id', new ParseUUIDPipe()) id: string,
+  ): Promise<UserEntity> {
     return this.usersService.findOneByOrFail({
       id,
       status: UserStatusEnum.ACTIVE,
@@ -80,7 +82,7 @@ export class UserController {
   update(
     @Param('id', new ParseUUIDPipe()) id: string,
     @Body() updateUserDto: UpdateUserDto,
-  ) {
+  ): Promise<UserEntity> {
     return this.usersService.update(id, updateUserDto);
   }
 
@@ -92,7 +94,7 @@ export class UserController {
   @ApiResponse({ status: 401, type: UnauthorizedSwagger })
   @ApiResponse({ status: 403, type: ForbiddenUserSwagger })
   @ApiResponse({ status: 404, type: NotFoundSwagger })
-  deactivate(@Param('id', new ParseUUIDPipe()) id: string) {
+  deactivate(@Param('id', new ParseUUIDPipe()) id: string): Promise<void> {
     this.usersService.deactivate(id);
     return;
   }
