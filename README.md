@@ -70,6 +70,12 @@ available in the `/docs` path
 - PATCH /v1/user/:id
 - DELETE /v1/user/:id
 
+- POST /v1/address
+- GET /v1/address
+- GET /v1/address/:id
+- PATCH /v1/address/:id
+- DELETE /v1/address/:id
+
 `note`: in routes with JWT authentication, it is verified if the user contained in the token is the same one that is requesting.
 
 ### Test
