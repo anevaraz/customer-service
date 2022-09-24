@@ -33,6 +33,8 @@ $ docker-compose up -d
 $ docker-compose down
 ```
 
+## Running locally for debug and test
+
 ```bash
 # local development
 $ yarn start
@@ -42,6 +44,10 @@ $ yarn start:dev
 
 # local production mode
 $ yarn start:prod
+
+# unit tests
+$ yarn test
+
 ```
 
 ## Docs
@@ -77,11 +83,3 @@ available in the `/docs` path
 - DELETE /v1/address/:id
 
 `note`: in routes with JWT authentication, it is verified if the user contained in the token is the same one that is requesting.
-
-### Test
-
-```bash
-# unit tests
-$ yarn test
-
-```
