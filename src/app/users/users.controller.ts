@@ -9,6 +9,8 @@ import {
   Query,
   ParseUUIDPipe,
   UseGuards,
+  DefaultValuePipe,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { UserService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -22,13 +24,14 @@ import {
   ApiSecurity,
   ApiTags,
 } from '@nestjs/swagger';
-import { QueryUserDto } from './dto/query-user.dto';
 import { ResponseUserSwagger } from '../../helpers/swagger/response.user.swagger';
+import { ResponsePaginateUserSwagger } from '../../helpers/swagger/response.paginate.user.swagger';
 import { BadRequestSwagger } from '../../helpers/swagger/bad-request.swagger';
 import { UnauthorizedSwagger } from '../../helpers/swagger/unauthorized.swagger';
 import { NotFoundSwagger } from '../../helpers/swagger/not-found.swagger';
 import { ForbiddenUserSwagger } from '../../helpers/swagger/forbidden.user.swagger';
 import { UserEntity } from './entities/users.entity';
+import { Pagination } from 'nestjs-typeorm-paginate';
 
 @Controller('v1/user')
 @ApiTags('Users')
@@ -47,11 +50,22 @@ export class UserController {
 
   @Get()
   @ApiBearerAuth('jwt')
-  @ApiOperation({ summary: 'find all users by status (default `active`)' })
-  @ApiResponse({ status: 200, type: ResponseUserSwagger, isArray: true })
+  @ApiOperation({ summary: 'find all users' })
+  @ApiResponse({
+    status: 200,
+    type: ResponsePaginateUserSwagger,
+  })
   @ApiResponse({ status: 401, type: UnauthorizedSwagger })
-  findAllByStatus(@Query('status') query: QueryUserDto): Promise<UserEntity[]> {
-    return this.usersService.findAllByStatus(query);
+  paginate(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
+  ): Promise<Pagination<UserEntity>> {
+    limit = limit > 100 ? 100 : limit;
+    return this.usersService.paginate({
+      page,
+      limit,
+      route: '/user',
+    });
   }
 
   @UseGuards(AuthGuard('jwt'))

@@ -4,10 +4,14 @@ import { MessagesHelper } from '../../helpers/messages.helper';
 import { FindOptionsWhere, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { DeactivateUserDto } from './dto/deactivate-user.dto';
-import { QueryUserDto } from './dto/query-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/users.entity';
 import { UserStatusEnum } from './enum/user-status.enum';
+import {
+  paginate,
+  Pagination,
+  IPaginationOptions,
+} from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class UserService {
@@ -21,10 +25,9 @@ export class UserService {
     return await this.usersRepository.save(user);
   }
 
-  async findAllByStatus(query: QueryUserDto) {
-    return await this.usersRepository.find({
-      where: { status: Number(query) | UserStatusEnum.ACTIVE },
-    });
+  async paginate(options: IPaginationOptions): Promise<Pagination<UserEntity>> {
+    const queryBuilder = this.usersRepository.createQueryBuilder('c');
+    return paginate<UserEntity>(queryBuilder, options);
   }
 
   async findOneByOrFail(where: FindOptionsWhere<UserEntity>) {
