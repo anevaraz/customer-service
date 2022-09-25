@@ -13,8 +13,9 @@ Customer service project, testable and high performance Node.js API.
 - Husky Git hooks that automatically runs [Jest](https://jestjs.io/) before all pushs;
 - `ConfigService`: easily manage environment variables;
 - `ValidationPipe`: evaluate input data and if valid, simply pass it through unchanged; otherwise, throw an exception when the data is incorrect;
-- `Swagger`: The [OpenAPI](https://swagger.io/specification/) specification is a language-agnostic definition format used to describe RESTful APIs. Nest provides a dedicated module which allows generating such a specification by leveraging decorators;
-- `Middlewares`: the authentication middleware was implemented for the api key header and the jwt middleware that checks if the user contained in the token is the same one who performs the request
+- `Swagger`: the [OpenAPI](https://swagger.io/specification/) specification is a language-agnostic definition format used to describe RESTful APIs. Nest provides a dedicated module which allows generating such a specification by leveraging decorators;
+- `Middlewares`: he authentication middleware was implemented for the api key header and the jwt middleware that checks if the user contained in the token is the same one who performs the request
+- `Pagination`: pagination helper method for TypeORM repositories or queryBuilders with strict typings.
 
 ## Installation for local development
 
